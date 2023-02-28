@@ -1,7 +1,16 @@
 import { pool } from "../config/mysql-config.js";
 export async function getEmployees(limit) {
-  const [rows] = await pool.query(`SELECT emp_no FROM salaries limit ${limit}`);
-  return rows;
+  if (limit) {
+    const [rows] = await pool.query(
+      `SELECT emp_no FROM salaries limit ${limit}`
+    );
+    return rows;
+  } else {
+    const [rows] = await pool.query(
+      `SELECT emp_no FROM salaries ORDER BY emp_no DESC LIMIT 1`
+    );
+    return rows[0];
+  }
 }
 export async function getEmployee(id) {
   const [row] = await pool.query(`SELECT * FROM employees where emp_no=${id}`);
