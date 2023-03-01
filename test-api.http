@@ -13,7 +13,8 @@ PUT http://localhost:6000/employee/?emp_no=10001 HTTP/1.1
 content-type: application/json
 
 {
-    "gender": "F"
+    "first_name": "Georgi",
+    "gender": "M"
 }
 
 ###

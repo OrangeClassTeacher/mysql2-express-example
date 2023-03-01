@@ -1,4 +1,5 @@
 import { pool } from "../config/mysql-config.js";
+
 export async function getEmployees(limit) {
   if (limit) {
     const [rows] = await pool.query(
@@ -31,10 +32,15 @@ export async function createEmployee(
   );
   return result;
 }
-export async function updateEmployee(emp_no, upadatedData) {
-  const [result] = await pool.query(
-    `UPDATE employees SET ${upadatedData}  WHERE emp_no = ${emp_no}`
-  );
+export async function updateEmployee(emp_no, updatedData) {
+  let [result] = "";
+  for (let i = 0; i < Object.keys(updatedData).length; i++) {
+    result = await pool.query(
+      `UPDATE employees SET ${Object.keys(updatedData)[i]} ='${
+        Object.values(updatedData)[i]
+      }'  WHERE emp_no = ${emp_no}`
+    );
+  }
   return result;
 }
 export async function deleteEmployee(emp_no) {
