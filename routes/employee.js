@@ -36,9 +36,11 @@ Router.delete("/employee", async (req, res) => {
 Router.post("/employee", async (req, res) => {
   const { body } = req;
   const getLast = await getEmployees();
+
+  console.log(getLast);
   const { birth_date, first_name, last_name, gender, hire_date } = body;
   const result = await createEmployee(
-    getLast.emp_no + 1,
+    getLast.emp_no + 3,
     birth_date,
     first_name,
     last_name,

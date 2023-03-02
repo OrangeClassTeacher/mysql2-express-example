@@ -1,9 +1,9 @@
 import { pool } from "../config/mysql-config.js";
 
-export async function getEmployees(limit) {
+export async function getEmployees(limit, where) {
   if (limit) {
     const [rows] = await pool.query(
-      `SELECT emp_no FROM salaries limit ${limit}`
+      `SELECT emp_no FROM salaries limit ${limit} `
     );
     return rows;
   } else {
